@@ -1,0 +1,36 @@
+﻿Nomor 1. Pemahaman dasar.
+	- Jelaskan apa yang dimaksud dengan data spasial, berserta bentuk-bentuk data spasial
+	- Jelaskan apa yang dimaksud dengan data time series, berserta bentuk-bentuk data time series
+
+Nomor 2. Visualisasi data covid-19. (Sumber data: Bahan Ajar Big Data/adataset/dataset_covid.xlsx)
+	- Buatlah visualisasi heatmap. Dibuat sama persis (Lampiran Lampiran_tugas2_heatmap_covid19.PNG).
+	- Buatlah visualisasi time series untuk melihat data positif, sembuh, meninggal harian.
+	Dengan syarat
+		# Data harian dilakukan anggregasi sehingga menjadi data bulanan.
+		# Lalukan analisa. Mengapa perlu dilakukan anggregasi
+			(Lampiran_tugas2_time_series_covid19.png dan Lampiran_tugas2_time_series_aggregrasi.png)
+	- Buatlah pie chart untuk melihat jumlah positif, sembuh, meninggal tertinggi berdarkan provinsi
+		(Lampiran_tugas2_pie_chart.png)
+	- Buatlah stacked bar jumlah positif, sembuh, meninggal tertinggi berdasarkan provinsi.
+	- Buatlah grouping bar jumlah positif, sembuh, meninggal tertinggi berdasarkan provinsi.
+	- Buatlah analisa statistik deskriptif dari (Lampiran_tugas2_barplot.png).
+		Misalkan jumlah positif di Pulau jawa x kasus. Hal ini lebih banyak sekian persen jika dibandingkan dengan Pulau X.
+		Semakian banyak analisa yg dilakukan semakin baik.
+		
+Nomor 3. Analisa statistik data cuaca BMKG.
+	- Pilihlah salah satu provinsi dari Riau, Sumatera Selatan, Jambi, Kalimantan barat, timuer, selatan, tengah.
+	- Kemudian download data cuaca (Curah hujan, Temperatur rata2, Kelembahan rata2) untuk tahun 2015, 2019, 2020. 
+		Sebaiknya dicek terlebih dahalu, ttg kelengkapan data nya (Contoh: Lampiran_tugas2_cuaca.html)
+	- Lakukan visualisasi scatter plot Curah hujan, Temperatur rata2, Kelembahan rata2
+	- Lakukan perhitungan manual untuk mendapatkan nilai korelasi, determinasi, signifikansi menggunakan metode korelasi pearson.
+		(Ditulis tangan lalu di scan)
+	- Apa interpretasi dari nilai korelasi, determinasi, signifikansi yang didapat.
+
+Makna pembelajaran dan tugas.
+1. karakteristik data (tabular, time series, spasial) sangat mempengaruhi perbedaan hasil visualisasi dan analisa statistik.
+2. Jika diberikan data time series. Lalu dilakukan proses uji korelasi.
+	maka pengaruh x terhadap y belum tentu sama untuk data tahun ini dengan data tahun lalu.
+	boleh jadi ada pengaruh dari autokorelasi maupun autokorelasi parsial Dapat mempengaruhi hasil.
+3. Jika diberikan data spasial. Lalu dilakukan proses uji korelasi.
+	maka pengaruh x terhadap y belum tentu sama untuk data diwilayah 1 dengan diwilayah 2.
+	boleh jadi perbedaan karakteristik garis lintang dan garis bujur. Dapat mempengaruhi hasil.

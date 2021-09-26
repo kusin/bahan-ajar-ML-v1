@@ -1,0 +1,1290 @@
+
+AKSES_DATA = (function($) {
+    var map;
+    var table_data;
+    var table='';
+    var dtLog;
+    var station_types;
+    var STATION_type, ID_val_provinsi, ID_val_kabupaten, TYPE_val_parameter, STATION_NAME, YEAR_data;
+    var EmptyTable_info = "Tidak ada data di tabel";
+    var LANGUAGE;
+    var statiun_point = new Array();
+    var redIcon ;
+    var myRenderer ;
+   // var markers;
+ 
+    return {
+        isTableLoaded: false,
+        set_language:function(language){
+            LANGUAGE = language;
+        },
+        set_statiun_type:function(statiun_type){
+            station_types = statiun_type;
+        },
+        set_selection_val:function(val_stationtype, val_provinsi, val_kabupaten, val_parameter, stationname, tahun){
+            STATION_type = val_stationtype;
+            ID_val_provinsi = val_provinsi;
+            ID_val_kabupaten = val_kabupaten;
+            TYPE_val_parameter = val_parameter
+            YEAR_data = tahun;
+            STATION_NAME = stationname;
+        },
+        EmptyTable_info:function(){
+          
+            if( LANGUAGE =='INDONESIA'){
+                if(STATION_NAME && YEAR_data){
+                    EmptyTable_info = "Tidak ada data di tabel"; 
+                }
+                else if(STATION_NAME && !YEAR_data){
+                    EmptyTable_info = "Belum ada data yang bisa ditampilkan. Pilih tahun terlebih dulu !"; 
+                }
+                else{
+                    EmptyTable_info = "Belum ada data yang bisa ditampilkan. Lengkapi nama stasiun dan parameter terlebih dulu !";
+                }
+            }
+            else{
+                if(STATION_NAME && TYPE_val_parameter && YEAR_data){
+                    EmptyTable_info =  "No data available in table"; 
+                }
+                else if(STATION_NAME && TYPE_val_parameter && !YEAR_data){
+                    EmptyTable_info = "No data can be displayed. Please select the year !"; 
+                }
+                else {
+                    EmptyTable_info = "No data can be displayed. Please complete the station name and parameters !";
+                };
+            }
+           
+            return EmptyTable_info;
+        },
+        handleDatatables: function(table) 
+        {
+            table_data = table;
+            this.table=table;
+            var entries_text;
+            var showing_page;
+            var showing_empty_info;
+        
+            if( LANGUAGE =='INDONESIA'){
+                entries_text = '_MENU_ baris';
+                showing_page = "Menampilkan _START_ sampai _END_ dari _TOTAL_ data";//Menampilkan 1 sampai 10 dari 31 data';
+                showing_empty_info = "Menampilkan 0 sampai 0 dari 0 data";
+            }
+            else{
+                entries_text = '_MENU_ entries';
+                showing_page = "Showing _START_ to _END_ of _TOTAL_ entries";
+                showing_empty_info = "Showing 0 to 0 of 0 entries";
+            }
+
+            var available_text = '<n style="font-size:14px;"><i class="fa fa-check font-green" ></i></n>';
+            var no_available_text =  '<n style="font-size:14px;"><i class="fa fa-times font-red" ></i></n>';
+            var no_measurement_text = '<n style="font-size:14px;"><i class="fa fa-minus" ></i></n>';
+            var bulan_width = '7.5%';
+            dtLog = table.DataTable(
+            {
+                "sDom":"ltipr",
+                //"bSort" : false,
+                "bPaginate": false,
+                'drawCallback': function () {
+                   
+                    $( '#stasiun-table tbody tr td' ).css( 'padding', '0px 0px 0px 0px' );
+                },
+                "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                    for(i in aData){
+                        data = aData[i];
+                        if(data>=0 && data<=31){
+                        }
+                        else{
+                                $('td', nRow).eq(i).css('background-color', '#A9A9A9');
+                        }
+
+                    }
+					
+				  },
+                "initComplete": function() {
+                   // $(' div.dataTables_paginate').css({'text-align' : 'center'});
+                },
+                "oLanguage": {
+                
+                    "sLoadingRecords": "&nbsp;",
+                    "sProcessing": "Loading...",
+                    "sLengthMenu": entries_text,
+                    "sEmptyTable": AKSES_DATA.EmptyTable_info(),
+                    "sInfo": showing_page,
+                    "sInfoEmpty":  showing_empty_info,
+                   // "sInfoFiltered": "(filtered from _MAX_ total records)"
+                },
+           
+                language: { search: "" }, 
+                ajax: 					{
+                                            url:MC.baseUrl + 'akses_data/get_data_table',
+                                            type: "POST",
+                                            data: function(data) {
+                                                return {'type' : STATION_type,  'idrefprovince' : ID_val_provinsi,'idrefregency' : ID_val_kabupaten, 'station_name': STATION_NAME, 'parameter': TYPE_val_parameter, 'year' : YEAR_data}
+                                            }
+                                           
+                                        },
+                                       
+                        columnDefs:	[
+                            
+                                        {
+                                            'targets': 0, 
+                                            //"width": "10%",
+                                            //'orderable':false,
+                                            "className": "text-center",
+                                            'searchable':false
+                                           
+                                        },
+                                        {
+                                            'targets': 1, 
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 2, 
+                                           // width: '20%',
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 3, 
+                                            width: "50px",
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 4, 
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 5, 
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 6, 
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 7, 
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 8, 
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 9, 
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 10, 
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 11, 
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        },
+                                        {
+                                            'targets': 12, 
+                                            width: bulan_width,
+                                            "className": "text-center",
+                                            render : function(data) 
+                                            {
+                                                if(data==0){
+                                                    return 	no_available_text;
+                                                }
+                                                else if(data==1){
+                                                    return 	available_text;
+                                                }
+                                                else{
+                                                    return 	no_measurement_text;
+                                                }
+                                                
+                                            }
+                                        }
+                                   
+                                    ],
+                                    'order': [0 , 'asc']
+                        
+                                                                
+            });
+         
+        
+        },
+    
+        reloadTable: function ()
+        {
+          
+            dtLog.ajax.reload(function () {
+                
+                $('#stasiun-table .dataTables_empty').text(AKSES_DATA.EmptyTable_info());
+            } );
+        
+        },
+        handleChart:function(year_begin, year_end){
+        
+            const titleCase = (string) => {
+                return string
+                  .split(' ')
+                  .map(word => word.substr(0,1).toUpperCase() + word.substr(1,word.length))
+                  .join(' ');
+              };
+        
+            $.ajax(
+                {
+                    url: MC.baseUrl + 'akses_data/get_data_chart',
+                    type: "POST",
+                    data: {'type' : STATION_type,  'idrefprovince' : ID_val_provinsi,'idrefregency' : ID_val_kabupaten, 'station_name': STATION_NAME, 'parameter': TYPE_val_parameter, 'year' : year_end},
+                    dataType: "json",
+                    success:function(result) 
+                    {
+                       
+                       var data_chart = new Array();
+                       var nama_parameter = ''; var title;
+                       var text_x, text_y,text_graph_name;
+                       if(TYPE_val_parameter){
+                           nama_parameter = $('select[name="parameter"] option:selected').text();
+                       }
+
+                       if(LANGUAGE=='INDONESIA'){
+                            text_x = 'Tahun'; 
+                            text_y = 'Grafik Ketersediaan Data'; 
+                            text_graph_name = 'BMKG - Pusat Database';
+                       }
+                       else{
+                            text_x = 'Year'; 
+                            text_y = 'Data Availability Graph'; 
+                            text_graph_name = 'BMKG - Center of Database';
+                       }
+                       if(result){
+                            var data = result['data_chart'];
+                            year_begin = result['year_begin'];
+                            year_end = result['year_end'];
+                    
+                            for (i in data) {
+                                data_chart[i] = new Array();
+                                data_chart[i][0] = Date.UTC(data[i].year,(parseInt(data[i].month)-1), 15);
+                                data_chart[i][1] = data[i].ketersediaan_data;
+                            
+                            }
+
+                     
+                            $("#chart-ketersediaan-data").highcharts({
+                                chart: {
+                                    zoomType: 'x',
+                                    events: {
+                                        load: function(event) {
+                                           // $('.loading-process').hide(); 
+                                          
+                                          $("#chart-ketersediaan-data").show();
+                                        }
+                                    }  
+                                },
+                                title: {
+                                    text: text_y + titleCase(nama_parameter)+'<br> '+$('select[name="stasiun"]').val()+''
+                                },
+                                subtitle: {
+                                    //text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                                   
+                                },
+                                credits: {
+                                    text: text_graph_name,
+                                    href: '#'
+                                },
+                                exporting: {
+                                    enabled: false,
+                                },
+                                xAxis: {
+                                    title: {
+                                        text: text_x,
+                                    },
+                                    type: 'datetime',
+                                    minTickInterval: 3600*24*28*10000,//time in milliseconds
+                                    minRange: 3600*24*28*10000,
+                                    ordinal: false, //this sets the fixed time formats 
+                                
+                                  //  min: new Date(''+year_begin+'/01/01').getTime(),
+                                   // max: new Date(''+year_end+'/12/31').getTime(),
+                                    min:Date.UTC(year_begin, 0, 1),
+                                    max:Date.UTC(year_end, 11, 31),
+                                    dateTimeLabelFormats: 
+                                    {
+                                    month: '%Y',
+                                    year: '%Y'
+                                        /*
+                                            %a: Short weekday, like 'Mon'.
+                                            %A: Long weekday, like 'Monday'.
+                                            %d: Two digit day of the month, 01 to 31.
+                                            %e: Day of the month, 1 through 31.
+                                            %b: Short month, like 'Jan'.
+                                            %B: Long month, like 'January'.
+                                            %m: Two digit month number, 01 through 12.
+                                            %y: Two digits year, like 09 for 2009.
+                                            %Y: Four digits year, like 2009.
+                                            %H: Two digits hours in 24h format, 00 through 23.
+                                            %I: Two digits hours in 12h format, 00 through 11.
+                                            %l (Lower case L): Hours in 12h format, 1 through 11.
+                                            %M: Two digits minutes, 00 through 59.
+                                            %p: Upper case AM or PM.
+                                            %P: Lower case AM or PM.
+                                            %S: Two digits seconds, 00 through 59
+                                        */
+                                    }
+                                },
+                                yAxis: {
+                                    title: {
+                                        text: text_y+ ' (%)',
+                                    },
+                                    min: 0,
+                                    max: 100
+                                },
+                                legend: {
+                                    enabled: false
+                                },
+                                plotOptions: {
+                                   area: {     
+                                        fillColor: {
+                                            linearGradient: {
+                                            },
+                                            stops: [
+                                            ]
+                                        },
+                                        marker: {
+                                            radius: 1
+                                        },
+                                        lineWidth: 5,
+                                        states: {
+                                            hover: {
+                                                lineWidth: 5
+                                            }
+                                        },
+                                        threshold: null
+                                    },
+                                    column: {
+                                     //   pointPlacement: 'between'
+                                    }
+                                },
+                                tooltip: {
+                                    headerFormat: '{point.x:%B}, {point.x:%Y}<br>',
+                                    pointFormat: '{series.name} : <b>{point.y:1f} %</b>'
+                                },
+                                series: [{
+                                    type: 'column',
+                                    pointWidth:1,
+                                    name: "Ketersediaan Data",
+                                    data: 
+                                    (
+                                        data_chart
+                                    )
+                                }]
+                            });
+                            if(LANGUAGE=='INDONESIA'){
+                                Highcharts.setOptions({
+                                    lang: {
+                                        shortMonths: [ 
+                                            'Jan', 'Feb', 'Mar', 
+                                            'Apr', 'Mei', 'Jun',  'Jul', 
+                                            'Agu', 'Sep', 'Okt', 
+                                            'Nov', 'Des'
+                                        ],
+                                        months: [ 
+                                            'Januari', 'Februari', 'Maret', 
+                                            'April', 'Mei', 'Juni',  'Juli', 
+                                            'Agustus', 'September', 'Oktober', 
+                                            'November', 'Desember'
+                                        ],
+                                        weekdays: [ 
+                                            'Minggu', 'Senin', 'Selasa', 
+                                            'Rabu', 'Kamis', 'Jumat', 'Sabtu'
+                                        ],
+                                    }
+                                });
+                           }
+                           else{
+                            Highcharts.setOptions({
+                                lang: {
+                                    shortMonths: [ 
+                                        'Jan', 'Feb', 'Mar', 
+                                        'Apr', 'May', 'Jun', 
+                                        'Jul', 'Aug', 'Sep', 
+                                        'Oct', 'Nov'
+                                    ],
+                                    months: [ 
+                                        'January', 'February', 'March',
+                                        'April', 'May', 'June', 'July',
+                                        'August', 'September', 'October',
+                                        'November', 'December'
+                                    ],
+                                    weekdays: [
+                                        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+                                    ],
+                                   
+                                }
+                            });
+                           }
+                            
+                        }
+                      
+                        
+                    }
+                });	
+            
+            
+        },
+        get_val_select_marker:function(info_stasiun){
+            
+            $('select[name="jenis-stasiun"]').val(info_stasiun['type']).trigger('change.select2');
+            $.ajax(
+            {
+                url: MC.baseUrl + 'akses_data/get_province_by_idrefregency',
+                type: "POST",
+                data: {'id': info_stasiun['idrefregency']},
+                dataType: "json",
+                success:function(data) 
+                {
+                    
+                    var ID_provinsi = data.idrefprovince;
+                    $('select[name="provinsi"]').val(ID_provinsi).trigger('change.select2');
+                   
+                    $.ajax(
+                    {
+                        url: MC.baseUrl + 'akses_data/get_kabupaten_by_station_type_idrefprovince',
+                        type: "POST",
+                        data: {'idrefprovince': ID_provinsi ,'type' : info_stasiun['type']},
+                      
+                        dataType: "json",
+                        success:function(data) 
+                        { 
+                            $('select[name="kabupaten"]').attr('disabled', false);
+                            $('select[name="kabupaten"]').find('option').not(':first').remove();
+                            $.each(data, function(key, value) 
+                            {
+                                $('select[name="kabupaten"]').append('<option value="'+ value.id +'">'+ value.name +'</option>');
+                            });
+                            $('select[name="kabupaten"]').val(info_stasiun['idrefregency']);
+                            
+                            var val_stationtype = $('select[name="jenis-stasiun"]').val();
+                            var val_provinsi = $('select[name="provinsi"]').val();
+                            var val_kabupaten =  $('select[name="kabupaten"]').val();
+                            var val_parameter =  $('select[name="parameter"]').val();
+                            
+
+                        
+                            AKSES_DATA.stationcoordinat_marker(val_stationtype, val_provinsi, val_kabupaten, val_parameter, info_stasiun['station_name']);
+                            AKSES_DATA.set_statiun_name(val_stationtype, val_provinsi, val_kabupaten);
+
+                            var option = new Option(info_stasiun['station_name'], info_stasiun['station_name'], true, true);
+                            $('select[name="stasiun"]').append(option);
+                        }
+                    });	
+                }
+            });
+        },
+       
+        set_marker:function(data){
+             
+            if(data)
+            {
+                
+                for (i in data) {
+                    info_stasiun = new Array();
+    
+                    info_stasiun['type']= data[i].type;
+                    info_stasiun['idrefregency'] = data[i].idrefregency;
+                    info_stasiun['station_name'] = data[i].station_name;
+                    statiun_point[i] = L.circleMarker([data[i].latitude, data[i].longitude], {
+                        color: 'red',//'#cc0000',
+                        radius: 7.5,
+                        renderer: myRenderer
+                    })
+                    .on('click', (function (info_stasiun) {
+                        return function () {
+                            AKSES_DATA.get_val_select_marker(info_stasiun);
+                        }
+                    })(info_stasiun))
+                    .addTo(map);
+                }
+            
+            }
+
+             
+            /*
+           for (i in data) {
+                info_stasiun[i] = new Array();
+    
+                info_stasiun[i]['type']= data[i].type;
+                info_stasiun[i]['idrefregency'] = data[i].idrefregency;
+                info_stasiun[i]['station_name'] = data[i].station_name;
+                statiun_point[i] = L.marker([data[i].latitude, data[i].longitude],{icon: redIcon, num_cordinat:i}).on('click', function(e, i){
+                    AKSES_DATA.get_val_select_marker(e.target.options.num_cordinat, info_stasiun);
+                }).addTo(map);
+            }
+            */
+            
+    
+          
+
+            /*
+            if(data)
+            {
+                var info_stasiun = new Array();
+                statiun_point = new Array();
+                
+                for (i in data) {
+                    //statiun_point[i]  = L.marker([data[i].latitude, data[i].longitude]);
+                    info_stasiun[i] = new Array();
+           
+                    info_stasiun[i]['type']= data[i].type;
+                    info_stasiun[i]['idrefregency'] = data[i].idrefregency;
+                    info_stasiun[i]['station_name'] = data[i].station_name;
+                    statiun_point[i] = L.marker([data[i].latitude, data[i].longitude],{icon: redIcon, num_cordinat:i}).on('click', function(e, i){
+                        markers.clearLayers();
+                        AKSES_DATA.get_val_select_marker(e.target.options.num_cordinat, info_stasiun);
+                    });
+                  
+                    markers.addLayer(statiun_point[i]);
+                }
+
+                markers.on('clusterclick', function (a) {
+                    a.layer.zoomToBounds();
+                 //   a.layer.spiderfy();
+                });
+        
+            
+                map.addLayer(markers);
+            }
+            */
+            
+        },
+        stationcoordinat_marker:function(val_stationtype, val_provinsi, val_kabupaten, val_parameter, station_name){
+       
+            for(i in statiun_point){
+                map.removeLayer(statiun_point[i])
+            }
+            
+            /*
+            // ---- cluster marker remove layer -----
+            markers.clearLayers();
+            map.removeLayer(markers);
+            */
+            if(!val_stationtype){
+                val_stationtype = station_types;
+            }
+
+            $.ajax(
+            {
+                    url: MC.baseUrl + 'akses_data/get_station_data',
+                    type: "POST",
+                    data: {'type' : val_stationtype,  'idrefprovince' : val_provinsi, 'idrefregency' : val_kabupaten,  'station_name': station_name.trim()},
+                    dataType: "json",
+                    success:function(data) {
+                        AKSES_DATA.set_marker(data); 
+                    }
+                    
+            });
+                   
+         
+        },
+        initPeta: function () {
+            map = L.map('peta-stasiun', {
+                attributionControl: false,
+                autoClose: false,
+            }).setView([-1.789275,118],4);
+    
+        //var rbi = L.tileLayer.wms('https://portal.ina-sdi.or.id/arcgis/services/IGD/Rupabumi_Indonesia_50K/MapServer/WMSServer?', {
+      	//var rbi = L.tileLayer.wms('https://portal.ina-sdi.or.id/arcgis/services/IGD/RupabumiIndonesia_250K/MapServer/WmsServer?', {
+	// var rbi = L.tileLayer.wms('https://portal.ina-sdi.or.id/arcgis/services/IGD/RupabumiIndonesia/MapServer/WMSServer?', {    
+	  var rbi = L.tileLayer.wms('http://gis.bmkg.go.id/arcgis/services/RBI_18/RBI_25_50_250_wms/MapServer/WMSServer?', {
+	    layers: '0',
+                attribution: 'RBI'
+            });
+            map.addLayer(rbi);
+
+            L.control.mousePosition( {
+                position: 'bottomleft',
+                separator: ' : ',
+                emptyString: '0 : 0 ',
+                lngFirst: false,
+                numDigits: 5,
+                lngFormatter: undefined,
+                latFormatter: undefined,
+                prefix: ""
+              }).addTo(map);
+           
+
+            var scaleControl = L.control.scale({position: 'bottomright'}).addTo(map);
+            /*
+            var y = map.getSize().y,
+                x = map.getSize().x;
+
+            // calculate the distance the one side of the map to the other using the haversine formula
+            var maxMeters = map.containerPointToLatLng([0, y]).distanceTo( map.containerPointToLatLng([x,y]));
+
+            // calculate how many meters each pixel represents
+            var MeterPerPixel = maxMeters/x ;
+
+            $('#map-scale').text(parseInt(MeterPerPixel*scaleControl.options.maxWidth));
+ 
+            map.on('zoomend', function () {
+                var y = map.getSize().y,
+                x = map.getSize().x;
+
+                // calculate the distance the one side of the map to the other using the haversine formula
+                var maxMeters = map.containerPointToLatLng([0, y]).distanceTo( map.containerPointToLatLng([x,y]));
+
+                // calculate how many meters each pixel represents
+                var MeterPerPixel = maxMeters/x ;
+
+                $('#map-scale').text(parseInt(MeterPerPixel*scaleControl.options.maxWidth));
+            });
+            */
+            //tambah nort arrow
+            var nort_text;
+            if( LANGUAGE=="INDONESIA"){
+                nort_text = 'Utara';
+            }
+            else{
+                nort_text = 'North';
+            }
+            var north = L.control({position: "bottomleft"});
+            north.onAdd = function(map) {
+                var div = L.DomUtil.create("div", "info legend");
+                div.innerHTML = '<div class="text-center" style="margin:auto; "><div style="font-weight: bold;"> '+nort_text+'</div><img src="'+MC.baseUrl + 'admin/asset/plugins/map-arrow/north-arrow.png" style= "width:20px;"></div>';
+                return div;
+            }
+            north.addTo(map);
+
+
+            redIcon = new L.Icon({
+                iconUrl: MC.baseUrl + 'admin/asset/plugins/leaflet-color-markers/img/marker-icon-2x-red.png',
+                shadowUrl: MC.baseUrl + 'admin/asset/plugins/leaflet-color-markers/img/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+        
+            myRenderer = L.canvas({ padding: 0.5 });
+
+        //    markers = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false});
+
+            
+        },
+        set_tahun_selection_show_table:function(table, val_stationtype, val_provinsi, val_kabupaten, station_name, val_parameter, year_end){ 
+           
+
+            $.ajax(
+				{
+					url: MC.baseUrl + 'akses_data/get_min_date_by_station_name',
+					type: "POST",
+					data: {'station_name': station_name},
+					dataType: "json",
+					success:function(data) 
+					{
+                      
+                        $('select[name="tahun"]').find('option').not(':first').remove();
+                        if(data){
+                            for(var i=data; i<=year_end; i++){
+                                $('select[name="tahun"]').append('<option value="'+ i +'">'+ i +'</option>');
+                            }
+
+                            $("select[name='tahun']").val(year_end);
+                        }
+                        
+
+                        var tahun =  $('select[name="tahun"]').val();
+                     
+                        AKSES_DATA.set_selection_val(val_stationtype, val_provinsi, val_kabupaten, val_parameter, station_name, tahun);
+                        AKSES_DATA.load_table(table);
+					}
+				});	
+        },
+        set_kabupaten:function(ID, val_stationtype){ 
+
+			if(ID) 
+			{		
+                if(!val_stationtype){
+                    val_stationtype = station_types;
+                }
+                
+				$.ajax(
+				{
+					url: MC.baseUrl + 'akses_data/get_kabupaten_by_station_type_idrefprovince',//get_kabupaten',
+					type: "POST",
+					data: {'idrefprovince': ID, 'type' : val_stationtype},
+					dataType: "json",
+					success:function(data) 
+					{  
+                        $('select[name="kabupaten"]').attr('disabled', false);
+						$('select[name="kabupaten"]').find('option').not(':first').remove();
+						$.each(data, function(key, value) 
+						{
+							$('select[name="kabupaten"]').append('<option value="'+ value.id +'">'+ value.name +'</option>');
+						}); 
+					}
+				});					
+			}
+			else
+			{
+                $('select[name="kabupaten"]').attr('disabled', true);
+				$('select[name="kabupaten"]').find('option').not(':first').remove();
+            }
+        },
+        set_statiun_name: function(val_stationtype, val_provinsi, val_kabupaten){
+            if(!val_stationtype){
+                val_stationtype = station_types;
+            }
+            //var option = new Option($('select[name="station_name"] option:first').text(), $('select[name="station_name"] option:first').val(), true, true);
+            //$('select[name="station_name"]').append(option);
+            var option = new Option($('select[name="stasiun"] option:first').text(), $('select[name="stasiun"] option:first').val(), true, true);
+            $('select[name="stasiun"]').append(option);
+
+            $('select[name="stasiun"]').select2({
+                ajax: { 
+                
+                    url: MC.baseUrl + 'akses_data/get_station_name',
+                    type: "post",
+                    dataType: 'json',
+                    delay: 10,
+                    data: function (params) {
+                   
+                        var params_page = params.page || 1;
+                    
+                        return {
+                            searchTerm: params.term, // search term
+                            page: params_page,
+                            maxViewData: 1000,
+                            'type' : val_stationtype,  
+                            'idrefprovince' : val_provinsi, 
+                            'idrefregency' : val_kabupaten
+                        };
+                    },
+                    processResults: function (response, params) {
+                
+                    params.page = params.page || 1;
+            
+                        return {
+                            results: response.output,
+                            pagination: {
+                                more: (params.page * 1000) < response.sum
+                            }
+                        };
+                    },
+                cache: true
+                },
+                placeholder: 'Search for a repository',
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection
+            });
+        
+            function formatRepo (repo) {
+                if (repo.loading) {
+                return repo.text;
+                }
+        
+                var markup = repo.station_name;
+        
+                return markup;
+            }
+
+            function formatRepoSelection (repo) {
+           
+                if(repo.id.trim()){
+                   // return repo.id;
+                    return repo.station_name;
+                }
+                else{
+                    return repo.text;
+                }
+                
+            }
+
+
+/*
+    // Fetch the preselected item, and add to the control
+var studentSelect = $('select[name="stasiun"]');
+$.ajax({
+    url: MC.baseUrl + 'akses_data/get_station_name',
+    type: "POST",
+    data: {
+        page: 1,
+        maxViewData: 1000,
+        'type' : val_stationtype,  
+        'idrefprovince' : val_provinsi, 
+        'idrefregency' : val_kabupaten},
+    dataType: "json",
+}).then(function (data) {
+   
+  /*  var option = new Option(data.output[0].station_name, data.output[0].id, true, true);
+    studentSelect.append(option);
+    var option = new Option(data.output[1].station_name, data.output[1].id, true, true);
+    studentSelect.append(option);
+    var option = new Option(data.output[2].station_name, data.output[2].id, true, true);
+    studentSelect.append(option);*/
+   // var option = new Option(data.output[2].station_name, data.output[2].id, true, true);
+   // studentSelect.append(option).trigger('change');
+  
+    // create the option and append to Select2
+   // var option = new Option(data.full_name, data.id, true, true);
+    //studentSelect.append(option).trigger('change');
+
+    // manually trigger the `select2:select` event
+  /*  studentSelect.trigger({
+        type: 'select2:select',
+        params: {
+            data: data
+        }
+    });*/
+//});
+    
+   /*
+        $('select[name="stasiun"]').val('').trigger('change.select2');
+        
+        $.ajax(
+            {
+                url: MC.baseUrl + 'akses_data/get_station_name',
+                type: "POST",
+                data: {'type' : val_stationtype,  'idrefprovince' : val_provinsi, 'idrefregency' : val_kabupaten},
+                dataType: "json",
+                success:function(data) 
+                {
+                    $('select[name="stasiun"]').find('option').not(':first').remove();
+                 
+                       $.each(data, function(key, value) 
+                    {
+                        $('select[name="stasiun"]').append('<option value="'+ value.station_name +'">'+ value.station_name +'</option>');
+                    }); 
+                
+                    if(val_stationtype && val_provinsi  && val_kabupaten){
+                        $('select[name="stasiun"]').val($('select[name="stasiun"] option:last-child').val()).trigger('change.select2');
+                    }
+                }
+            });
+
+            */
+        },
+        set_province_selection:function(val_stationtype){ 
+            if(!val_stationtype){
+                val_stationtype = station_types;
+            }
+            
+            $.ajax(
+				{
+					url: MC.baseUrl + 'akses_data/get_povince_by_station_type',
+					type: "POST",
+					data: {'type': val_stationtype},
+					dataType: "json",
+					success:function(data) 
+					{
+                        $('select[name="provinsi"]').find('option').not(':first').remove();
+            
+						$.each(data, function(key, value) 
+						{
+							$('select[name="provinsi"]').append('<option value="'+ value.id +'">'+ value.name +'</option>');
+						}); 
+					}
+				});	
+        },
+		handle_selection:function(){
+            
+            
+            var val_stationtype = $('select[name="jenis-stasiun"]').val();//var val_stationtype = $('select[name="jenis-stasiun"]').find('option').eq(1).val();
+            var val_provinsi = $('select[name="provinsi"]').val();
+            var val_kabupaten =  $('select[name="kabupaten"]').val();
+            var val_parameter =  $('select[name="parameter"]').val();
+            var tahun =  $('select[name="tahun"]').val();
+            var station_name = $('select[name="stasiun"]').val();
+
+            if(!val_stationtype){
+                val_stationtype = station_types;
+            }
+     
+            AKSES_DATA.set_statiun_name(val_stationtype, val_provinsi, val_kabupaten);
+            AKSES_DATA.stationcoordinat_marker(val_stationtype, val_provinsi, val_kabupaten, val_parameter, station_name);
+            AKSES_DATA.set_province_selection(val_stationtype);
+            
+            
+            $('select[name="jenis-stasiun"]').on('change', function() 
+			{
+                val_stationtype = $('select[name="jenis-stasiun"]').val();
+                val_provinsi = '';
+                val_kabupaten =  '';
+                val_parameter =  $('select[name="parameter"]').val();
+                station_name = '';
+                
+                AKSES_DATA.set_kabupaten('', val_stationtype);
+                AKSES_DATA.set_statiun_name(val_stationtype, val_provinsi, val_kabupaten);
+                AKSES_DATA.stationcoordinat_marker(val_stationtype, val_provinsi, val_kabupaten, val_parameter, station_name);
+                AKSES_DATA.set_province_selection(val_stationtype);
+            });
+
+            //atur provinsi
+            $('select[name="provinsi"]').on('change', function() 
+			{
+                var ID_provinsi = $(this).val();
+                val_stationtype = $('select[name="jenis-stasiun"]').val();
+                val_provinsi = $('select[name="provinsi"]').val();
+                val_kabupaten ='';
+                val_parameter =  $('select[name="parameter"]').val();
+                station_name = '';
+                
+                AKSES_DATA.set_kabupaten(ID_provinsi, val_stationtype);
+                AKSES_DATA.set_statiun_name(val_stationtype, val_provinsi, val_kabupaten);
+                AKSES_DATA.stationcoordinat_marker(val_stationtype, val_provinsi, val_kabupaten, val_parameter, station_name);
+            });
+            
+            //atur kabupaten
+            $('select[name="kabupaten"]').on('change', function() 
+			{
+                val_stationtype = $('select[name="jenis-stasiun"]').val();
+                val_provinsi = $('select[name="provinsi"]').val();
+                val_kabupaten =  $('select[name="kabupaten"]').val();
+                val_parameter =  $('select[name="parameter"]').val();
+                station_name = '';
+                
+                AKSES_DATA.set_statiun_name(val_stationtype, val_provinsi, val_kabupaten);
+                AKSES_DATA.stationcoordinat_marker(val_stationtype, val_provinsi, val_kabupaten, val_parameter, station_name);
+            });
+
+ 
+            //atur nama stasiun
+            $('select[name="stasiun"]').on('change', function() 
+			{
+                val_stationtype = $('select[name="jenis-stasiun"]').val();
+                val_provinsi = $('select[name="provinsi"]').val();
+                val_kabupaten =  $('select[name="kabupaten"]').val();
+                val_parameter =  $('select[name="parameter"]').val();
+                station_name = $('select[name="stasiun"]').val();
+               
+                AKSES_DATA.stationcoordinat_marker(val_stationtype, val_provinsi, val_kabupaten, val_parameter, station_name);
+            });
+
+            $('select[name="tahun"]').on('change', function() 
+			{
+                tahun =  $('select[name="tahun"]').val();
+                AKSES_DATA.set_selection_val(STATION_type, ID_val_provinsi, ID_val_kabupaten, TYPE_val_parameter, STATION_NAME, tahun);
+                AKSES_DATA.reloadTable();
+            });
+
+        },
+        disp_stationinfo:function(data, index, val_stationtype, val_provinsi, val_kabupaten, station_name){
+            if(data[index].station_number){
+                $('#disp-nostasiun').text(data[index].station_number);
+            }
+
+            if(data[index].station_name){
+                $('#disp-namastasiun').text(data[index].station_name);
+            }
+
+            if(val_stationtype){
+                $('#disp-type').text($('select[name="jenis-stasiun"] option:selected').text());
+            }
+
+            if(data[index].region){
+                $('#disp-region').text(data[index].region);
+            }
+
+            if(val_provinsi){
+                $('#disp-provinsi').text($('select[name="provinsi"] option:selected').text());
+            }
+            else if(data[index].idrefregency){
+            
+                $.ajax(
+                {
+                    url: MC.baseUrl + 'akses_data/get_kabupaten_province_name',
+                    type: "POST",
+                    data: {'id': data[index].idrefregency},
+                    dataType: "json",
+                    success:function(data) 
+                    {
+                        $('#disp-provinsi').text(data.province);
+                        $('#disp-kabupaten').text(data.regency);
+                    }
+                });	
+            }
+          
+            if(val_kabupaten ){
+                $('#disp-kabupaten').text($('select[name="kabupaten"] option:selected').text());
+            }
+            else if(data[index].idrefregency){
+                $.ajax(
+                    {
+                        url: MC.baseUrl + 'akses_data/get_kabupaten_province_name',
+                        type: "POST",
+                        data: {'id': data[index].idrefregency},
+                        dataType: "json",
+                        success:function(data) 
+                        {
+                            $('#disp-kabupaten').text(data.regency);
+                        }
+                    });
+            }
+
+            if(data[index].latitude){
+                $('#disp-lintang').text(data[index].latitude);
+            }
+
+            if(data[index].longitude){
+                $('#disp-bujur').text(data[index].longitude);
+            }
+
+            if(data[index].elevation){
+                $('#disp-ketinggian').text(data[index].elevation);
+            }
+
+            if(data[index].soil){
+                $('#disp-soil').text(data[index].soil);
+            }
+
+            if(data[index].exposure){
+                $('#disp-exposure').text(data[index].exposure);
+            }
+
+            if(data[index].land_use){
+                $('#disp-land-use').text(data[index].land_use);
+            }
+
+            if(data[index].timezone){
+                $('#disp-timezone').text(data[index].timezone);
+            }
+        },
+        load_table:function(table){
+           
+            if (AKSES_DATA.isTableLoaded) {
+        
+                AKSES_DATA.reloadTable();
+                AKSES_DATA.isTableLoaded = true;
+            } 
+            else {
+                AKSES_DATA.handleDatatables(table);
+                AKSES_DATA.isTableLoaded = true;
+            }
+        },
+        handleproses:function(form, table, year_begin, year_end){
+          
+            $(form).ajaxForm({ 
+                success: function (response) { 
+                   
+                    if(response.error && response.error.type == 'validation') { 
+                    
+                        for(i in response.error.messages) {
+                            var input = form.find('div[name="'+i+'"]');
+                            
+                            if(!input.data('has-error')) { 
+                                input.after('<span class="help-block error-msg" name="'+i+'"  style="color:red;">'+response.error.messages[i]+'</div>');
+                                input.data('has-error', 1); 
+                            
+                            }
+                        }
+                        for(i in response.field_form.valid) {
+                            var input = form.find('div[name="'+i+'"]');
+                            
+                            if(input.data('has-error')) { 
+                                input.data('has-error', 0); 
+                                form.find('span[name="'+i+'"]').remove(); 
+                            }
+                        }
+
+                     
+                    }
+                    else{
+                        
+                        for(i in response.field_form.valid) {
+                            var input = form.find('div[name="'+i+'"]');
+                            
+                            if(input.data('has-error')) { 
+                                input.data('has-error', 0); 
+                                form.find('span[name="'+i+'"]').remove(); 
+                            }
+                        }
+
+                        $('#hasilpencarianinfo').css("display", "block");
+                        $('#hasilpencariantabel').show();
+        
+                        $('#disp-nostasiun').text('');
+                        $('#disp-namastasiun').text('');
+                        $('#disp-type').text('');
+                        $('#disp-region').text('');
+                        $('#disp-provinsi').text('');
+                        $('#disp-kabupaten').text('');
+                        $('#disp-lintang').text('');
+                        $('#disp-bujur').text('');
+                        $('#disp-ketinggian').text('');
+                        $('#disp-soil').text('');
+                        $('#disp-exposure').text('');
+                        $('#disp-land-use').text('');
+                        $('#timezone').text('');
+                    
+                        var val_stationtype = $('select[name="jenis-stasiun"]').val();
+                        var val_provinsi = $('select[name="provinsi"]').val();
+                        var val_kabupaten =  $('select[name="kabupaten"]').val();
+                        var val_parameter =  $('select[name="parameter"]').val();
+                        var station_name = $('select[name="stasiun"]').val();
+                        var tahun =  $('select[name="tahun"]').val();
+                
+                        AKSES_DATA.set_selection_val(val_stationtype, val_provinsi, val_kabupaten, val_parameter, station_name, tahun);
+                        AKSES_DATA.handleChart(year_begin, year_end); 
+                        AKSES_DATA.set_tahun_selection_show_table(table, val_stationtype, val_provinsi, val_kabupaten, station_name, val_parameter, year_end);
+                      
+                        if(response.data.length ==1){
+                            var data = response.data;
+                            AKSES_DATA.disp_stationinfo(data, 0, val_stationtype, val_provinsi, val_kabupaten, station_name);
+                  
+                        }        
+                    }
+                }
+                
+            });
+        }
+    };
+})(jQuery);

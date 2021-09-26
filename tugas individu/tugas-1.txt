@@ -1,0 +1,73 @@
+﻿Nomor 1. Hitung bangun datar dan ruang
+# Hitung volume dan luas permukaan balok
+	inputan data berupa hasil generate number dengan kaidah distribusi seragam.
+	Jumlah data inputan sebanyak 200 baris. Dengan syarat
+		- pajang memiliki rentang nilai dari 10 - 20
+		- lebar memiliki rentang nilai dari 5 - 10
+		- tinggi memiliki rentang nilai dari 5 - 10
+	Proses menghitung volume dan luas permukaan menggunakan deklarasi fungsi
+	Output
+		- berupa visualisasi data histogram volume dan luas permukaan
+		- berupa file csv "menggabungkan inputan data dengan hasil hitung volume dan luas permukaan"
+		panjang		lebar	tinggi	volume	permukaan
+		x			x		x		x		x
+		x			x		x		x		x
+		x			x		x		x		x
+	link bantuan http://uc-r.github.io/generating_random_numbers/	
+	
+# Hitung luas dan keliling lingkaran
+	inputan data genrate sequence 1 sampai 100 dengan menggunakan kelipatan 0.5
+	ex. 1, 1.5, 2.0, 2.5 ..... 100
+	Proses memiliki syarat
+		- hitung luas dan keliling dibuat deklarasi fungsi
+		- apabila jari-jari kelipatan 7 menggunakan phi = 22/7.
+		- Apabila bukan kelipatan 7 menggunakan phi = 3.14
+	Output
+		- berupa visualisasi diagram batang. Berapa jumlah data jari yang memiliki kelipatan 7 dan bukan kelipatan 7.
+		- berupa file csv "gabungkan inputan data dengan hasil hitung luas dan keliling"
+	link bantuan http://www.simonqueenborough.info/R/basic/lessons/Sequences_of_Numbers.html
+
+# Hitung luas dan keliling segitiga
+	inputan data berupa file excel. Dengan syarat
+		- Carilah 10 bilangan pythagoras selain alas = 3, tinggi = 4, sisi miring = 5.
+		- inputan data hanya dari alas dan sisi miring.
+		ex. alas 	sisi miring
+			x		x
+			x		x
+			x		x
+	proses memiliki syarat
+		- implementasikan rumus pythagoras untuk mendapatkan tinggi segitiga
+		- hitung luas dan keliling dibuat deklarasi fungsi
+	output memiliki syarat
+		ex. alas 	tinggi	sisi miring 	luas 	keliling
+			x		x		x				x		x
+			x		x		x				x		x
+			x		x		x				x		x
+		Point utamanya
+		Bagaimana caranya menyisipkan tinggi diantara alas dan sisi miring.
+		luas dan keliling setelah sisi miring.
+
+Nomor 2. Hitung IPK.
+	inputan data berupa hasil generate number dengan kaidah distribusi normal.
+	Dengan syarat
+		- menggunakan mk semestr 1 - 3 dengan kurikulum 2015.
+		- jumlah inputan data sebanyak 200 baris.
+		- rentang nilai akhir diantara 50 - 85
+		ex. NIM		MK-1	MK-2	MK-3	...		MK-N
+			x		x		x		x		...		x
+			x		x		x		x		...		x
+			x		x		x		x		...		x
+	Proses memiliki syarat
+		- IP setiap mahasiswa persemeter dihitung terlebih dahulu. Menggunakan deklarasi fungsi
+		- IPK dihitung berdasarkan jumlah IP semester 1 sampai 3. Menggunakan deklarasi fungsi.
+	Output
+		- visualisasi histogram dari IPK. untuk melihat sebaran IPK seluruh mahasiwa
+		- visualisasi diagram batang dengan 2 kategori. Amat Baik dan Baik 
+			Berapa banyak mahasiswa yang mendapat IPK diatas 3 (Amat Baik) dan 2.75 - 2.99 (Baik).
+		- berupa file csv. ex
+		NIM		IPsmstr1	IPsmstr2	IPsmstr3	IPK
+		x		x			x			x			x
+		x		x			x			x			x
+		x		x			x			x			x
+			
+			

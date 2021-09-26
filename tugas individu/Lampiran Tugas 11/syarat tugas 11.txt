@@ -1,0 +1,33 @@
+Laptop Gaming High-End (HP Omen/ Asus ROG/ Acer Predator/ Lenovo Legion)
+	- Jika CPU Ryzen 7 atau Intel i7. Dan RAM minimal 16GB 3200 Mhz dual-chanel
+		Kerjakan tugas nomor 1 (LSTM-RNN) dan nomor 2 (Hyperparameter GridSerach)
+
+Laptop Gaming Price to Performace (HP Pavilion Gaming, Asus TUF, Acer Nitro, Lenovo Ideapad Gaming)
+	- Jika CPU Ryzen 5 atau Intel i5. Dan RAM minimal 8GB 2933 Mhz dual-chanel.
+		Bebas memilih salah satu dari:
+			- Kerjakan tugas nomor 1 (LSTM-RNN) dan nomor 2 (Hyperparameter GridSerach)
+			- Kerjakan tugas nomor 1 (LSTM-RNN) dan nomor 3 (Hyperparameter Trial-Eror)
+
+Laptop ultra portable High-End (HP Envy/ HP Spactre/ Asus ZenBook/ Acer Swift/ Lenovo Yoga/ Lenovo Thinkpad)
+	- Jika CPU Ryzen 7 atau Intel i7. Dan RAM minimal 16GB 3200 Mhz dual-chanel
+		Kerjakan tugas nomor 1 (LSTM-RNN) dan nomor 2 (Hyperparameter GridSerach)
+	- Jika CPU Ryzen 5 atau Intel i5. Dan RAM minimal 8GB 2933 Mhz dual-chanel
+		Kerjakan tugas nomor 1 (LSTM-RNN) dan nomor 3 (Hyperparameter Trial-Eror)
+
+Laptop ultra portable Price to Performace (HP Pavilion/ Asus Vivobook/ Acer Aspire/ Lenovo Ideapad/ Lenovo Thinkbook)
+	- Jika CPU Ryzen 5 atau Intel i5. Dan RAM minimal 8GB 2933 Mhz dual-chanel
+		- kerjakan tugas nomor 1 (LSTM-RNN) dan tidak diwajibkan nomor 3 (Hyperparameter Trial-Eror)
+	- Jika CPU Ryzen 3 atau Intel i3. Dan RAM minimal 4GB 2666 Mhz dual-chanel
+		- kerjakan tugas nomor 1 (LSTM-RNN)
+
+PC Dekstop (Maka syaratnya sistem cooling)
+	- Jika menggunakan custom watercooling atau AIO watercooling
+		Kerjakan tugas nomor 1 (LSTM-RNN) dan nomor 2 (Hyperparameter GridSerach)
+	- Jika menggunakan CPU cooler after market atau stock cooler
+		Kerjakan tugas nomor 1 (LSTM-RNN) dan nomor 3 (Hyperparameter Trial-Eror)
+		
+Apple Ekosistem
+	- Jika menggunakan CPU M1
+		Kerjakan tugas nomor 1 (LSTM-RNN) dan nomor 2 (Hyperparameter GridSerach)
+	- Jika menggunakan CPU berbasis intel
+		Kerjakan tugas nomor 1 (LSTM-RNN) dan nomor 3 (Hyperparameter Trial-Eror)

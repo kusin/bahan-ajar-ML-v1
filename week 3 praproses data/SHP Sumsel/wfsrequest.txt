@@ -1,0 +1,1 @@
+http://geoportal.sumselprov.go.id:8080/geoserver/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=ADMIN:kab_sum2014_160020171227084222&outputFormat=shape-zip

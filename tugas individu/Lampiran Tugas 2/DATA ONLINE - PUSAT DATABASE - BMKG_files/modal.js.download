@@ -1,0 +1,14 @@
+var KOMENTAR = (function($){
+
+return{
+
+	init:function(){
+		
+		 var url = MC.baseUrl + 'main/komentar_saran';
+                
+          $('#modal').modal('show').find('.modal-content').load(url);
+
+	}
+		
+}
+})(jQuery);

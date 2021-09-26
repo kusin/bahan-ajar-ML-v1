@@ -1,0 +1,22 @@
+Nomor 1.
+	- Jelaskan  tentang metode C45 dan RDT (regression decision tree)
+	- Tuliskan perbedaan rumus antara kedua metode tersebut.
+
+Nomor 2.
+	- Gunakan dataset bahan ajar 3 (praproses data sst nina 3.4, soi index, oni index, titik panas)
+	- implementasikan metode RDT menggunakan dataset tersebut.
+	- Bagaimana gambar plotnya
+	- Berapa akurasi nya
+
+Nomor 3.
+	- Gunakan dataset tugas 3 (praproses data Radiasi Matahari, Curah hujan, suhu, kelembaban udara, kecepatan angi, titik panas)
+	- implementasikan metode RDT menggunakan dataset tersebut.
+	- Bagaimana gambar plotnya
+	- Berapa akurasi nya
+
+Nomor 4.
+	- Gunakan dataset "D:/Bahan Ajar Big Data/dataset/dataset_klasifikasi_tugas.xlsx"
+	- implementasikan metode C45 menggunakan dataset tersebut.
+	- Bagaimana gambar plotnya. Berapa akurasi nya.
+	- Bagaimana rule fuzzy nya.
+	- Bagaimana hitungan manual.

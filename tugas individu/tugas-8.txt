@@ -1,0 +1,1 @@
+Kerjakan kembali tugas 1.txt menggunakan bahasa python

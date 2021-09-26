@@ -1,0 +1,70 @@
+Praproses Data "Model Prediksi Deret Waktu Titik Panas dengan Memperhatikan Faktor Iklim"
+Pilihlah satu area studi berikut.
+	- Sumatera Selatan, Riau, Jambi, Kalimantan Barat, Kalimantan Timur, Kalimantan Tengah, Kelimantan Selatan.
+-----------------------------------------------------------------------------------------------------------------------
+
+
+Pra proses data iklim
+Langkah 1. Unduh data cuaca (Radiasi Matahari, Curah hujan, suhu, kelembaban udara, kecepatan angin)
+	- tahun 2001 - sampai 2020.
+	- Namun jika prov yg dipilih tidak memiliki data dari tahun 2001. Unduh data sesuai data terlama yg tersedia.
+	- Jika memilih Riau data tersedia dari tahun 2001. Dan saya ada sebagain praproses titik panas riau
+	- Jika memilih Sumsel data tersedia dari tahun 2001. Praproses titik panas bisa menggunakan bahan ajar pert 3.
+	- Jika memilih Kalimantan. Proses olah data lebih bagus. Krn pola datanya lebih mudah untuk di analisa.
+
+Langkah 2. Integrasi data tersebut sehingga keluaran nya menjadi berikut (Lampiran 3\hasil integrasi data cuaca.PNG)
+
+Langkah 3. Periksa missing value.
+	- Apabila data (tidak diisi, di isi dengan 8888, atau di isi dengan 9999) maka lakukan pembersihan data.
+	- Apabila data di isi dengan angka 0. Maka itu merupakan sebuah data yang benar. Cek konsep perbedaan tipe data interval dan rasio.
+	- cara pembersihan data bisa menggunakan mean/median/modus. Namun bila menggunakan konsep ini hasilnya kurang bagus krn menghasilkan inkonsistensi data.
+	- cara pembersihan data yg recom untuk kasus ini adalah interpolasi dengan konsep statistik x
+		metode interpolasi memiliki banyak turunan seperti Polinomial, Eksponential, Kuadratik, dll (Kloi ga salah ada 7 turunan interpolasi)
+		Cek turunan interpolasi yang dapat digunakan untuk data musiman.
+
+Langkah 4. Aggregasi data tersebut menjadi data bulanan.
+	- Sehingga memiliki 2 jenis data. pertama data harian dan kedua data bulanan.
+
+Langkah 5. Lakukan visualisasi time series pada data harian dan bulana.
+	- Jika terdapat kesamaan pola data. Maka proses Anggregasi data berhasil dilakukan.
+-----------------------------------------------------------------------------------------------------------------------
+
+
+Pra proses data titik panas
+Langkah 1. Unduh data titik panas dari. https://firms.modaps.eosdis.nasa.gov/download/create.php
+	- Pilih Indonesia, Buffer 0, Fire Source MODIS, tanggal 01-Jan-2001 sampai 31-Des-2020, format csv file.
+		
+Langkah 2. Pemotongan Data. Menggunakan QGIS.
+	- Lakukan overlay data shp (area studi) dengan file csv titik panas.
+	- Kemudian potong menggunakan metode clip (vector > Geoprocessing Tools > Clip)
+	- Save data bentuk csv
+
+Langkah 3. Lakukan aggregasi data menjadi data harian dan bulanan. contoh hasil integrasi ada di (Lampiran tugas 3\hasil aggregasi data titik panas.PNG)
+	- Sehingga memiliki 2 jenis data. pertama data harian dan kedua data bulanan.
+	- Cara melakukan aggregasi harian adalah hitung jumlah baris yang memiliki tanggal acq_date yang sama. 
+	- Cara melakukan aggregasi bulanan adalah hitung jumlah baris yang memiliki tanggal acq_date dibulan yang sama.
+
+Langkah 4. Lakukan visualisasi time series pada data harian dan bulanan.
+	- Jika terdapat kesamaan pola data. Maka proses Anggregasi data berhasil dilakukan.
+
+Langklah 5. integrasi data.
+	- Satukan data harian iklim dengan data harian titik panas.
+	- Satukan data bulanan iklim dengan data bulanan iklim.
+	- Contoh hasil integrasi data di (Lampiran tugas 3\hasil integrasi data cuaca dan hotspot.PNG)
+	
+Langkah 6. Normalisasi data untuk data harian dan bulanan
+	- Rubahlah rentang nilai menjadi -1 sampai 1. Menggunakan metode max-min scale.
+
+Langkah 7. Lakukan visualisasi time series pada data harian dan bulanan.
+	- Jika terdapat kesamaan pola data. Maka proses normalisasi selesai.
+	
+Langkah 8. visualisasi scatterplot dengan menampilkan nilai korelasi dan signifikansi.
+	- Proses ini dilakukan untuk melihat
+		Apakah terdapat gelaja multikolinieritas pada sebuah data. Cek syarat multikolinieritas.
+		Apa saja fitur yang paling berpengaruh terhadap kemunculan titik panas.
+
+Langkah 9. Pembagian data.
+	- Membuat data latih 80% dan Data Uji 20%
+
+
+Selesai.

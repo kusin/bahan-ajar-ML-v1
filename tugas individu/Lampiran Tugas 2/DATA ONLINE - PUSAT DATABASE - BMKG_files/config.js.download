@@ -1,0 +1,23 @@
+/**
+ * Javascript Config App
+ * October 22, 2015
+ *
+ * @author HikmahTiar <hikmahtiar.cool@gmail.com>
+ **/
+APP = (function($){
+
+	return {
+
+		loadCss: function(url) {
+			var divLoadCSS = $('.load-css');
+			divLoadCSS.append('<link href="'+url+'" rel="stylesheet" type="text/css">');
+		},
+
+		loadJs: function(url) {
+			var divLoadJS = $('.load-js');
+			divLoadJS.append('<script src="'+url+'" type="text/javascript"></script>');
+		},
+
+	}
+	
+})(jQuery);

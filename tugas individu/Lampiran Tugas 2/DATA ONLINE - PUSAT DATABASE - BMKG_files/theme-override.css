@@ -1,0 +1,91 @@
+.ui-autocomplete {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	float: left;
+	display: none;
+	min-width: 160px;
+	_width: 160px;
+	padding: 4px 0;
+	margin: 2px 0 0 0;
+	list-style: none;
+	background-color: #ffffff;
+	border-color: #ccc;
+	border-color: rgba(0, 0, 0, 0.2);
+	border-style: solid;
+	border-width: 1px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding;
+	background-clip: padding-box;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+}
+.ui-menu-item {
+	padding: 5px;
+}
+
+.ui-menu-item:hover {
+	background: #169EF4;
+	cursor: pointer;
+	color: #FFF;
+}
+
+.ui-helper-hidden-accessible {
+	display: none;
+}
+
+.page-header {
+	background: url("../img/bg-header.jpg") transparent;
+	background-size:auto;
+}
+
+.page-header .page-header-top {
+	 	height: 116px;
+	 }
+
+	.page-header .page-header-menu {
+	 	background-color: #1F70B8;
+  	color: #ffffff;
+	 }
+
+	.page-header .page-header-menu .hor-menu .navbar-nav > li .dropdown-menu > li > a ,
+	.page-header .page-header-menu .hor-menu .navbar-nav > li.open > a, .page-header .page-header-menu .hor-menu .navbar-nav > li > a {
+  	color: #ffffff;
+}
+
+	.page-header .page-header-menu .hor-menu .navbar-nav > li.open > a, .page-header .page-header-menu .hor-menu .navbar-nav > li > a:hover {
+  background: none repeat scroll 0 0 #2386CA !important;
+}
+
+.page-header .page-header-top .top-menu  {
+	margin-top: 40px;
+}
+
+.page-header .page-header-menu .hor-menu .navbar-nav > li .dropdown-menu li:hover > a {
+  background: none repeat scroll 0 0 #2386CA !important;
+}
+
+.page-header .page-header-menu .hor-menu .navbar-nav > li .dropdown-menu {
+  	color: #ffffff;
+ 	background: none repeat scroll 0 0 #1F70B8;
+ 	box-shadow: 5px 5px rgba(85, 97, 111, 0.2);
+}
+
+.dropdown-user .dropdown-toggle {
+	background: rgba(255, 255, 255, 0.5) !important;
+}
+
+.dropdown-user .dropdown-toggle span {
+	color: #333 !important;
+}
+
+.dropdown-user .dropdown-toggle:hover span {
+	color: #666 !important;
+}

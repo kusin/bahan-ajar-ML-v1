@@ -1,0 +1,34 @@
+/*table.dataTable thead .sorting { 
+	background: url('../../../../asset/img/IconDatatables/sort_both.png') 
+	no-repeat center right !important;
+}*/
+
+table.dataTable thead .sorting_asc { 
+	background: url('../../../../asset/img/IconDatatables/sort_asc.png') 
+	no-repeat center right !important;
+}
+
+table.dataTable thead .sorting_desc { 
+	background: url('../../../../asset/img/IconDatatables/sort_desc.png') 
+	no-repeat center right !important;
+}
+
+table.dataTable thead .sorting_asc_disabled { 
+	background: url('../../../../asset/img/IconDatatables/sort_asc_disabled.png') 
+	no-repeat center right !important;
+}
+
+table.dataTable thead .sorting_desc_disabled { 
+	background: url('../../../../asset/img/IconDatatables/sort_desc_disabled.png') 
+	no-repeat center right !important;
+}
+
+div.dataTables_paginate {
+	margin: 0;
+	white-space: nowrap;
+	text-align: right;
+}
+
+.dataTables_filter {
+	text-align: right !important;
+}

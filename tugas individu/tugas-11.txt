@@ -1,0 +1,41 @@
+Membuat model prediksi deret waktu titk panas dengan memperhatikan faktor iklim menggunakan metode LSTM-RNN
+	- Gunakan dataset yang telah dibuat pada tugas 3 => (Lampiran Tugas 11/hasil akhir tugas 3.PNG)
+	- Direkomendasikan membaca lampiran tugas 11\syarat tugas 11.txt
+	- Direkomendasikan mengikuti setingan manual berikut
+		Set ke mode performace dan aktifkan multicore (Lampiran Tugas 11/mode performace.PNG)
+		Bertujuan untuk meningkatkan performa perangkat keras dan mengurangi waktu komputasi
+	- Direkomendasikan dalam keadaan mengisi batrai walaupun battre sudah terisi 100%.		
+		Bertujuan untuk meningkatkan performa perangkat keras dan mengurangi waktu komputasi
+		Sejak tahun 2016, jika battrai sudah 100%. Maka charger tidak akan mengisi daya ke batrai namun langsung ke perangkat keras.
+	- Direkomendasikan menggunakan cooling pad tambahan dan suhu ruangan ber AC 16 derajat
+		Bertujuan untuk menjaga suhu CPU agar tidak terjadi gejala throttling CPU.
+	- Jika perangkat keras memiliki fitur fan spedd dan fitur performace CPU. Maka setting ke mode maksimal
+		(Lampiran Tugas 11/fitur fan speed dan performance.PNG)
+		Bertujuan untuk menjaga suhu CPU agar tidak terjadi gejala throttling CPU.
+	
+		
+Nomor 1. Implementasi LSTM-RNN tanpa hyperparameter
+	- Buatlah model prediksi univariate
+		(contoh ada di D:\Bahan Ajar Big Data\week-11 lstm-rnn\lstm-rnn-univariate-2.ipynb)
+	- Buatlah model prediksi multivariate
+		(contih ada di D:\Bahan Ajar Big Data\week-11 lstm-rnn\lstm-rnn-multivariate-2.ipynb)
+	- Lalu analisa berapa perbedaan nilai RMSE, nilai korelasi dan waktu komputasi.
+
+Nomor 2. Implementasi LSTM-RNN menggunakan hyperparameter gridserach
+	- Buatlah model prediksi univariate
+		(contoh ada di D:\Bahan Ajar Big Data\week-11 lstm-rnn\lstm-rnn-univariate-1.ipynb)
+	- Buatlah model prediksi multivariate
+		(contih ada di D:\Bahan Ajar Big Data\week-11 lstm-rnn\lstm-rnn-multivariate-1.ipynb)
+	- Lalu analisa berapa perbedaan nilai RMSE, nilai korelasi dan waktu komputasi.
+
+Nomor 3. Implementasi LSTM-RNN menggunakan hyperparameter trial-eror
+	- Buatlah model prediksi univariate
+	- Buatlah model prediksi multivariate
+	- Contoh dari https://machinelearningmastery.com/grid-search-hyperparameters-deep-learning-models-python-keras/
+	- Lalu analisa berapa perbedaan nilai RMSE, nilai korelasi dan waktu komputasi.
+	
+NOTE. Lebih disukai apabila nomor 1, 2, 3 memperhatikan konsep timestep LSTM dan Uji-Stasioneritas.
+	
+
+
+

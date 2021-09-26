@@ -1,0 +1,20 @@
+Umumnya prediksi apa....?
+Anaisis Time Series => suatu data yang memiliki urutan waktu kejadian
+1. Statsioner
+	"Data yang fluktuasi datanya berada disekitar rataan"
+	ARIMA (Autoregresive Moving Avarage)
+2. Tren
+	"Data yang cenderung turun atau naik"
+	Regresi
+		a. (Regresi Linier Sederhana) => mmprediksi dgn 1 variabel bebas
+		b. Regresi Linier Berganda => mmprediksi dgn lebih dari 1 variabel bebas
+		c. Logistik Regresi => mmprediksi dgn lebih dari 1 variabel bebas
+3. Musiman
+	"Data fluktuasinya berulang pada periode waktu tertentu (rentang waktu yg singkat)"
+	SARIMA (Seasional Autoregresive Moving Average) => mmprediksi dgn 1 variabel bebas
+	Multivariate SARIMA => mmprediksi dgn lebih dari 1 variabel bebas
+4. Siklus
+	"Data Siklus adalah gabungan data treen dan data musiman tp periode waktunya panjang"
+	Multi Layer Procesing, RNN, LSTM, GRU, dll
+	Perubahan suhu muka laut (SST Nina 3.4)
+	dengan tekanan atmosfer (SOI) => southern oscillation index 
