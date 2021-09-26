@@ -28,7 +28,7 @@ library(RWeka)
 library(partykit)
 
 # load dataset
-dataset <- read_excel("D:/Bahan Ajar Big Data/dataset/dataset_klasifikasi.xlsx")
+dataset <- read_excel("D:/Bahan Ajar Big Data/dataset/dataset_klasifikasi_materi.xlsx")
 
 # membuat dataset agar bernilai kategori sesuai sarat inputan decision tree
 dataset <- data.frame(
@@ -54,6 +54,7 @@ formula_c50 <- Travel ~ Outlook + Temperature + Humidity + Wind
 # cara 1
 C45 <- J48(formula_c45, data=dataset) # cara 1 untuk memilih beberapa variabel saja. Umumnya sudah menggunakan seleksi fitur
 C50 <- C5.0(formula_c50, data=dataset)
+
 # cara 2
 C45 <- J48(Travel ~ ., data=dataset) # Cara 2 untuk menggunakan semua variabel
 C50 <- C5.0(Travel ~ ., data=dataset)
@@ -72,8 +73,4 @@ summary(C50)
 # create plot decission tree
 plot(C45,type="simple")
 plot(C50,type="simple")
-
-# Melakukan custom plot pohon keputusan menggunakan lib GGParty
-# https://cran.r-project.org/web/packages/ggparty/vignettes/ggparty-graphic-partying.html
-library(ggparty)
 
