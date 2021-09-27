@@ -28,7 +28,7 @@ library(RWeka)
 library(partykit)
 
 # load dataset
-dataset <- read_excel("D:/Bahan Ajar Big Data/dataset/dataset_klasifikasi_materi.xlsx")
+dataset <- read_excel("/home/lunox/Documents/GitHub/Bahan Ajar Big Data/dataset/dataset_klasifikasi_materi.xlsx")
 
 # membuat dataset agar bernilai kategori sesuai sarat inputan decision tree
 dataset <- data.frame(
