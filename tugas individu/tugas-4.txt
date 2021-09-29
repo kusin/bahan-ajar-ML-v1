@@ -19,7 +19,7 @@ Langkah 2 ekspolarasi data analysis
 	- Visualisasi time series Variabel bebas dan Variabel terikat ke dalam 1 frame
 	- Visualisasi boxplot (Variabel bebas dan Variabel terikat) untuk melihat berapa banyak nilai extrim yang ada. 
 	- if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
-		Visualisasi scatter plot, dimana Visualisasi tersebut dapat
+		Visualisasi scatter plot, dimana Visualisasi tersebut dapat melihat
 			# nilai determinasi dan p-value
 			# nilai intercept dan slope
 			# persamaan Regression Y = a + bx
@@ -51,6 +51,7 @@ if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
 	percobaan 1 : RDT menggunakan split validasi
 	percobaan 2 : RDT menggunakan hold-out
 	percobaan 3 : RDT menggunakan k-cross-validasi (k=10)
+		# (data latih 80% dan data uji 20%)
 else if(Omar){
 	percobaan 1 : RDT menggunakan metode split validasi (data latih 90% dan data uji 10%)
 	percobaan 2 : RDT menggunakan metode split validasi (data latih 80% dan data uji 20%)
@@ -99,7 +100,7 @@ if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
 	- cek missing value
 		# cek metode apa yang cocok ketika fitur nominal/ordinal terjadi missing value
 		# menggunkan interpolasi untuk fitur yang bertipe interval/rasio
-	- normalisasi data mengunakan max-min
+	- normalisasi data mengunakan z-score
 	- lalukan random sampling metode slovin. Kemudian cek hasil slovin menggunakan aturan nelson
 		# sehingga mempunyai dua buah data 1 tanpa slovin, 2 menggunakan slovin
 	- seleksi fitur menggunakan fast correlation based filter
@@ -111,16 +112,14 @@ if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
 
 }else if(omar){
 	- cek missing value
-		# cek metode apa yang cocok ketika fitur nominal/ordinal terjadi missing value
-		# menggunkan interpolasi untuk fitur yang bertipe interval/rasio
-
+		# na.omnit sudah cukup
 	- normalisasi data mengunakan max-min
 	- random sampling metode slovin
 		# sehingga mempunyai dua buah data 1 tanpa slovin, 2 menggunakan slovin
 	- seleksi fitur menggunakan uji korelasi
+		# cek apakah terjadi gejala multi-kolinieritas.
 		# jika fitur nominal/ordinal menggunakan spearman-rank
 		# jika fitur interval/rasio menggunakan pearson
-		# cek apakah terjadi gejala multi-kolinieritas.
 		# sehingga mempunyai 4 buah data
 			> tanpa slovin dan tanpa seleksi fitur
 			> tanpa slovin dan menggunakan seleksi fitur
