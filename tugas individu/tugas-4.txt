@@ -1,22 +1,186 @@
-Nomor 1.
-	- Jelaskan  tentang metode C45 dan RDT (regression decision tree)
-	- Tuliskan perbedaan rumus antara kedua metode tersebut.
+Nomor 1. Konsep Dasar
+- Jelaskan apa yang dimaksud dengan Decission Tree (DT) dan Regression Decission Tree (RDT)
+- Jelaskan perbedaan mendasar antara metode DT dan RDT, meliputi
+	# Perbedaan inputan data (nominal/ordinal/interval/rasio)
+	# Perbedaan rumus, ada atau tidak "gini index"
+	# Perbedaan hasil seperti rule fuzzy, tree, dan bilangan continue/diskret
+---------------------------------------------------------------------------------------------------------------
 
-Nomor 2.
-	- Gunakan dataset bahan ajar 3 (praproses data sst nina 3.4, soi index, oni index, titik panas)
-	- implementasikan metode RDT menggunakan dataset tersebut.
-	- Bagaimana gambar plotnya
-	- Berapa akurasi nya
 
-Nomor 3.
-	- Gunakan dataset tugas 3 (praproses data Radiasi Matahari, Curah hujan, suhu, kelembaban udara, kecepatan angi, titik panas)
-	- implementasikan metode RDT menggunakan dataset tersebut.
-	- Bagaimana gambar plotnya
-	- Berapa akurasi nya
+Nomor 2. Impletasi metode RDT menggunakan RStudio.
+Langkah 1 akuisisi data
+	- Gunakan dataset tugas 3 (praproses data Radiasi Matahari, Curah hujan, suhu, kelembaban udara, kecepatan angin, titik panas) menggunakan metode C45 dan C50.
+	- Variabel bebas/fitur/attribut
+		# Radiasi Matahari, Curah hujan, suhu, kelembaban udara, kecepatan angin
+	- Variabel terikat/label/class
+		# titik panas
 
-Nomor 4.
-	- Gunakan dataset "D:/Bahan Ajar Big Data/dataset/dataset_klasifikasi_tugas.xlsx"
-	- implementasikan metode C45 menggunakan dataset tersebut.
-	- Bagaimana gambar plotnya. Berapa akurasi nya.
-	- Bagaimana rule fuzzy nya.
-	- Bagaimana hitungan manual.
+Langkah 2 ekspolarasi data analysis
+	- Visualisasi time series Variabel bebas dan Variabel terikat ke dalam 1 frame
+	- Visualisasi boxplot (Variabel bebas dan Variabel terikat) untuk melihat berapa banyak nilai extrim yang ada. 
+	- if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
+		Visualisasi scatter plot, dimana Visualisasi tersebut dapat
+			# nilai determinasi dan p-value
+			# nilai intercept dan slope
+			# persamaan Regression Y = a + bx
+	else if(Omar){
+		Visualisasi scatter plot, dimana Visualisasi tersebut dapat
+			# nilai determinasi dan p-value
+	}else{
+		Visualisasi scatter plot seperti bahan ajar.
+	}
+
+Langkah 3 praproses data
+	- cukup jelas (sudah pada pertemuan 3)
+
+Langkah 4 pembagian data latih dan uji
+if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
+	menggunakan metode split validasi, hold out, k-cross-validasi (k=10)
+	data latih 80% dan data uji 20%
+else if(Omar){
+	menggunakan metode split validasi
+		# data latih 90% dan data uji 10%
+		# data latih 80% dan data uji 20%
+		# data latih 70% dan data uji 30%
+}else{
+	menggunakan metode split validasi dimana data latih 80% dan data uji 20%
+}
+
+Langkah 5 implementasikan algoritma RDT
+if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
+	percobaan 1 : RDT menggunakan split validasi
+	percobaan 2 : RDT menggunakan hold-out
+	percobaan 3 : RDT menggunakan k-cross-validasi (k=10)
+else if(Omar){
+	percobaan 1 : RDT menggunakan metode split validasi (data latih 90% dan data uji 10%)
+	percobaan 2 : RDT menggunakan metode split validasi (data latih 80% dan data uji 20%)
+	percobaan 3 : RDT menggunakan metode split validasi (data latih 70% dan data uji 30%)
+}else{
+	RDT menggunakan metode split validasi dimana data latih 80% dan data uji 20%
+}
+
+Langkah 6 evaluasi hasil
+if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
+	Bandingkan berapa perbedaan akurasi dan eror dari 3 percobaan yang telah dilakukan
+	Bagaimana bentuk rule fuzzy dan tree dari 3 percobaan yang telah dilakukan
+	Kesimpulan yang dihapkan:
+		# melakukan analisa tentang perbedaan metode pembagian data dapat mempengaruhi hasil.
+
+else if(Omar){
+	Bandingkan berapa perbedaan akurasi dan eror dari 3 percobaan yang telah dilakukan
+	Bagaimana bentuk rule fuzzy dan tree dari 3 percobaan yang telah dilakukan
+	Kesimpulan yang dihapkan:
+		# melakukan analisa tentang perbedaan persentase pembagian data dapat mempengaruhi hasil.
+}else{
+	Bagaimana bentuk rule fuzzy dan bentuk pohon
+}
+---------------------------------------------------------------------------------------------------------------
+
+
+Nomor 3. Hitungan manual metode DT 
+Langkah 1 akuisisi data
+- Gunakan dataset "D:/Bahan Ajar Big Data/dataset/dataset_klasifikasi_tugas.xlsx"
+
+Langkah 2
+- Bagaimana hitungan manual entropy dan informasi gain
+
+Langkah 3
+- Bagaimana bentuk rule fuzzy dan tree
+---------------------------------------------------------------------------------------------------------------
+
+
+Nomor 4 Impletasi C45 di RStudio
+Langkah 1 akusisi data https://www.kaggle.com/jsphyg/weather-dataset-rattle-package
+variabel bebas seluruh data kecuali rain tumorrow
+variabel terikat rain tumorrow
+
+Langkah 2 praproses data
+if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
+	- cek missing value
+		# cek metode apa yang cocok ketika fitur nominal/ordinal terjadi missing value
+		# menggunkan interpolasi untuk fitur yang bertipe interval/rasio
+	- normalisasi data mengunakan max-min
+	- lalukan random sampling metode slovin. Kemudian cek hasil slovin menggunakan aturan nelson
+		# sehingga mempunyai dua buah data 1 tanpa slovin, 2 menggunakan slovin
+	- seleksi fitur menggunakan fast correlation based filter
+		# sehingga mempunyai 4 buah data
+			> tanpa slovin dan tanpa seleksi fitur
+			> tanpa slovin dan menggunakan seleksi fitur
+			> menggunakan slovin dan tanpa seleksi fitur
+			> menggunakan slovin dan menggunakan seleksi fitur
+
+}else if(omar){
+	- cek missing value
+		# cek metode apa yang cocok ketika fitur nominal/ordinal terjadi missing value
+		# menggunkan interpolasi untuk fitur yang bertipe interval/rasio
+
+	- normalisasi data mengunakan max-min
+	- random sampling metode slovin
+		# sehingga mempunyai dua buah data 1 tanpa slovin, 2 menggunakan slovin
+	- seleksi fitur menggunakan uji korelasi
+		# jika fitur nominal/ordinal menggunakan spearman-rank
+		# jika fitur interval/rasio menggunakan pearson
+		# cek apakah terjadi gejala multi-kolinieritas.
+		# sehingga mempunyai 4 buah data
+			> tanpa slovin dan tanpa seleksi fitur
+			> tanpa slovin dan menggunakan seleksi fitur
+			> menggunakan slovin dan tanpa seleksi fitur
+			> menggunakan slovin dan menggunakan seleksi fitur
+}
+else{
+	- missing value menggunakan na.omnit
+	- normalisasi data mengunakan max-min
+	- tanpa random sampling
+	- seleksi fitur sesuai bahan ajar
+		# sehingga mempunyai 2 buah data
+			> tanpa seleksi fitur dan menggunakan seleksi fitur
+}
+
+Langkah 3 Pembagian data latih dan uji.
+- menggunakan metode split validasi 80% dan 20%
+
+Langkah 4. implementasikan C45
+if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
+	implementasikan c45 pada 4 buah data
+		> tanpa slovin dan tanpa seleksi fitur
+		> tanpa slovin dan menggunakan seleksi fitur
+		> menggunakan slovin dan tanpa seleksi fitur
+		> menggunakan slovin dan menggunakan seleksi fitur
+}
+else if(Omar){
+	implementasikan c45 pada 4 buah data
+		> tanpa slovin dan tanpa seleksi fitur
+		> tanpa slovin dan menggunakan seleksi fitur
+		> menggunakan slovin dan tanpa seleksi fitur
+		> menggunakan slovin dan menggunakan seleksi fitur
+
+}
+else{
+	implementasikan c45 pada 2 buah data (tanpa seleksi fitur dan menggunakan seleksi fitur)
+}
+
+Langkah 5 evaluasi hasil
+if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
+	Bandingkan nilai akurasi dan eror dari 4 buah data
+		> tanpa slovin dan tanpa seleksi fitur
+		> tanpa slovin dan menggunakan seleksi fitur
+		> menggunakan slovin dan tanpa seleksi fitur
+		> menggunakan slovin dan menggunakan seleksi fitur
+	Bagaimana bentuk rule fuzzy dan tree dari 4 percobaan yang telah dilakukan
+	Kesimpulan yang dihapkan:
+		# melakukan analisa tentang pengaruh slovin dan seleksi fitur dapat mempengaruhi hasil.
+}
+else if(Omar){
+	Bandingkan nilai akurasi dan eror dari 4 buah data
+		> tanpa slovin dan tanpa seleksi fitur
+		> tanpa slovin dan menggunakan seleksi fitur
+		> menggunakan slovin dan tanpa seleksi fitur
+		> menggunakan slovin dan menggunakan seleksi fitur
+	Bagaimana bentuk rule fuzzy dan tree dari 4 percobaan yang telah dilakukan
+	Kesimpulan yang dihapkan:
+		# melakukan analisa tentang pengaruh slovin dan seleksi fitur dapat mempengaruhi hasil.
+}
+else{
+	Bandingkan nilai akurasi dan eror dari 2 buah data (menggunakan seleksi fitur dan tanpa seleksi fitur)
+	Bagaimana bentuk rule fuzzy dan tree dari 2 percobaan yang telah dilakukan
+}
