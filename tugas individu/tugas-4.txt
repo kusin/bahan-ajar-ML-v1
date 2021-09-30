@@ -23,7 +23,7 @@ Langkah 2 ekspolarasi data analysis
 			# nilai determinasi dan p-value
 			# nilai intercept dan slope
 			# persamaan Regression Y = a + bx
-	else if(Omar){
+	else if(Omar, M Raffi){
 		Visualisasi scatter plot, dimana Visualisasi tersebut dapat
 			# nilai determinasi dan p-value
 	}else{
@@ -37,7 +37,7 @@ Langkah 4 pembagian data latih dan uji
 if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
 	menggunakan metode split validasi, hold out, k-cross-validasi (k=10)
 	data latih 80% dan data uji 20%
-else if(Omar){
+else if(Omar, M Raffi){
 	menggunakan metode split validasi
 		# data latih 90% dan data uji 10%
 		# data latih 80% dan data uji 20%
@@ -52,7 +52,7 @@ if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
 	percobaan 2 : RDT menggunakan hold-out
 	percobaan 3 : RDT menggunakan k-cross-validasi (k=10)
 		# (data latih 80% dan data uji 20%)
-else if(Omar){
+else if(Omar, M Raffi){
 	percobaan 1 : RDT menggunakan metode split validasi (data latih 90% dan data uji 10%)
 	percobaan 2 : RDT menggunakan metode split validasi (data latih 80% dan data uji 20%)
 	percobaan 3 : RDT menggunakan metode split validasi (data latih 70% dan data uji 30%)
@@ -67,7 +67,7 @@ if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
 	Kesimpulan yang dihapkan:
 		# melakukan analisa tentang perbedaan metode pembagian data dapat mempengaruhi hasil.
 
-else if(Omar){
+else if(Omar, M Raffi){
 	Bandingkan berapa perbedaan akurasi dan eror dari 3 percobaan yang telah dilakukan
 	Bagaimana bentuk rule fuzzy dan tree dari 3 percobaan yang telah dilakukan
 	Kesimpulan yang dihapkan:
@@ -110,7 +110,7 @@ if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
 			> menggunakan slovin dan tanpa seleksi fitur
 			> menggunakan slovin dan menggunakan seleksi fitur
 
-}else if(omar){
+}else if(omar, M Raffi){
 	- cek missing value
 		# na.omnit sudah cukup
 	- normalisasi data mengunakan max-min
@@ -146,7 +146,7 @@ if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
 		> menggunakan slovin dan tanpa seleksi fitur
 		> menggunakan slovin dan menggunakan seleksi fitur
 }
-else if(Omar){
+else if(Omar, M Raffi){
 	implementasikan c45 pada 4 buah data
 		> tanpa slovin dan tanpa seleksi fitur
 		> tanpa slovin dan menggunakan seleksi fitur
@@ -169,7 +169,7 @@ if (Iksan Adi Putra, M Hugo, M Miftah, M Naufal, M Landy){
 	Kesimpulan yang dihapkan:
 		# melakukan analisa tentang pengaruh slovin dan seleksi fitur dapat mempengaruhi hasil.
 }
-else if(Omar){
+else if(Omar, M Raffi){
 	Bandingkan nilai akurasi dan eror dari 4 buah data
 		> tanpa slovin dan tanpa seleksi fitur
 		> tanpa slovin dan menggunakan seleksi fitur
