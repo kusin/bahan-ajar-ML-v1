@@ -1,7 +1,7 @@
 Tugas 5 - Klasifikasi Naive Bayes
 
 Nomor 1. Pemahaman Dasar. 
-	"Jelaskan secara rinci perbedaan antara metode naive bayes dan bayesian"
+	"Jelaskan secara rinci perbedaan antara metode naive bayes dan bayesian network"
 	https://machinelearningmastery.com/introduction-to-bayesian-belief-networks/
 	https://machinelearningmastery.com/introduction-to-bayesian-networks-with-jhonatan-de-souza-oliveira/
 	https://www.geeksforgeeks.org/basic-understanding-of-bayesian-belief-networks/
