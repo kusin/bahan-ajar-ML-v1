@@ -1,1 +1,67 @@
 Tugas 5 - Klasifikasi Naive Bayes
+
+Nomor 1. Pemahaman Dasar. 
+	"Jelaskan secara rinci perbedaan antara metode naive bayes dan bayesian"
+	https://machinelearningmastery.com/introduction-to-bayesian-belief-networks/
+	https://machinelearningmastery.com/introduction-to-bayesian-networks-with-jhonatan-de-souza-oliveira/
+	https://www.geeksforgeeks.org/basic-understanding-of-bayesian-belief-networks/
+	https://www.geeksforgeeks.org/bayes-theorem/
+
+Nomor 2. Implementasi R
+	Analisa dan Perbandingan klasifikasi data cuaca australia menggunakan metode C45, C50, Naive Bayes, Bayesian Network
+	https://rpubs.com/sarataheri/bnlearnCGM
+
+	langkah 1 Akuisisi Data
+	- Menggunakan kembali dataset tugas 4.
+
+	langkah 2. ekspolarasi data dan analisis
+	- Berapa banyak jumlah data yang memiliki missing value disetiap fitur/attribut/variabel bebas
+		# Dalam bentuk tabel dan persentase (Lampiran tugas 5/analisa missing value.png)
+	- Lalukan analisa untuk memilih metode yg cocok untuk pembersihan missing value. Berikan alasan nya
+		# interpolasi, median mean modos, binning data, smooting data.
+			Setiap dataset punya metode terbaik untuk pembersihan data. Hal ini disebabkan perbedaan karakteristik antar dataset.
+			Hasil proses missing value yang baik adalah nilai sebaran data nya tetap terjaga.
+			Perhatikan contoh
+				analisis sebaran data sebelum praproses.png
+				analisis sebaran data setelah praproses.png
+	- Buatlah grouping barplot untuk melihat perbedaan RainTomorrow (yes or no) disetiap lokasi/wilayah
+	https://www.r-graph-gallery.com/48-grouped-barplot-with-ggplot2.html
+
+	Langkah 2 Praproses Data
+	- lakukan pemberishan data (missing value)
+	- lakukan seleksi fitur/attribut/variabel bebas yang paling mempengaruhi RainTomorrow
+	- Apabila terdapat fitur numeric. lakukan normaliasi max-min scala -1 sampai 1
+
+	Langkah 3 Pembagian Data
+	- Gunakan metode split validasi, k cross validasi (k=10), hold out
+		# Data latih 80% dan data uji 20%
+
+	Langkah 4. Implementasi Metode Klasifikasi
+	Percobaan 1. MENGGUNAKAN seleksi fitur
+		- perlakukan 1. menggunakan C45 dan split validasi, k cross validasi, hold
+		- perlakukan 2. menggunakan C50 dan split validasi, k cross validasi, hold
+		- perlakukan 3. menggunakan Naive Bayes dan split validasi, k cross validasi, hold
+		- perlakukan 4. menggunakan Bayesian Network dan split validasi, k cross validasi, hold
+			# Perlakuan 4. bersifat Sunnah
+			https://rstudio-pubs-static.s3.amazonaws.com/568156_66c1088683bb4c73acc5be88c72bc174.html
+			https://rpubs.com/sarataheri/bnlearnCGM
+
+	Percobaan 2. TANPA seleksi fitur
+		- perlakukan 5. menggunakan C45 dan split validasi, k cross validasi, hold
+		- perlakukan 6. menggunakan C50 dan split validasi, k cross validasi, hold
+		- perlakukan 7. menggunakan Naive Bayes dan split validasi, k cross validasi, hold
+		- perlakukan 8. menggunakan Bayesian Network dan split validasi, k cross validasi, hold
+			# Perlakuan 4. bersifat Sunnah
+			https://rstudio-pubs-static.s3.amazonaws.com/568156_66c1088683bb4c73acc5be88c72bc174.html
+			https://rpubs.com/sarataheri/bnlearnCGM
+
+	Langkah 5. Evaluasi
+	Lakukan proses confusion matrix (akurasi, presisi, recall) untuk setiap percobaan dan perlakuan
+	https://ejurnal.stmik-budidarma.ac.id/index.php/mib/article/view/2937/2038
+
+Nomor 3. Teori Dasar
+Perhatikan file # Bahan Ajar Big Data/Dataset/dataset_klasifikasi_tugas.xlsx
+Apabila data ke-1 sampai ke-12 digunakan untuk data latih dan data ke-13 dan 14 untuk data uji.
+Bagaimana proses hitungan manual tersebut
+
+	
