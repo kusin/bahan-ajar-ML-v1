@@ -56,12 +56,13 @@ Nomor 2. Implementasi R
 			https://rpubs.com/sarataheri/bnlearnCGM
 
 	Langkah 5. Evaluasi
-	Lakukan proses confusion matrix (akurasi, presisi, recall) untuk setiap percobaan dan perlakuan
-	https://ejurnal.stmik-budidarma.ac.id/index.php/mib/article/view/2937/2038
+	- Lakukan proses confusion matrix (akurasi, presisi, recall) untuk setiap percobaan dan perlakuan
+		# Cek Lampiran Tugas 5/Template Jawaban.xlsx
+		# https://ejurnal.stmik-budidarma.ac.id/index.php/mib/article/view/2937/2038
 
 Nomor 3. Teori Dasar
-Perhatikan file # Bahan Ajar Big Data/Dataset/dataset_klasifikasi_tugas.xlsx
-Apabila data ke-1 sampai ke-12 digunakan untuk data latih dan data ke-13 dan 14 untuk data uji.
-Bagaimana proses hitungan manual tersebut
+	- Perhatikan file # Bahan Ajar Big Data/Dataset/dataset_klasifikasi_tugas.xlsx
+	- Apabila data ke-1 sampai ke-12 digunakan untuk data latih dan data ke-13 dan 14 untuk data uji.
+	- Bagaimana proses hitungan manual tersebut
 
 	
