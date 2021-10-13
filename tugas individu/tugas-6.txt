@@ -1,0 +1,60 @@
+Tugas 6 - Klasterisasi KMeans
+
+Nomor 1. Pemahaman Dasar
+	# Jelaskan secara rinci perbedaan KMeans dengan DBSCAN untuk metode klasterisasi
+	# Jelaskan secara rinci perbedaan euclidean, manhattan, minkowski untuk metode menghitung jarak antar data
+	# Jelaskan pengaruh penggunaan metode elbow terhadap proses klasterisasi
+	
+Nomor 2. Analisa dan Perbandingan Klasterisasi Data IRIS menggunakan metode KMeans dan DBSCAN
+	Langkah 1. Akuisis Data
+		- Unduh data dari https://www.kaggle.com/uciml/iris
+	
+	Langkah 2. Praproses Data
+		- Buatlah visualiasi bellcurve untuk fitur sepal length, sepal width, petal length, petal width.
+			Berapa nilai standar deviasi dan simpangan baku dari setiap fiturnya
+			
+		- Buatlah scaterplot yang dikelompokan berdasarkan label/target/class (Species) dengan kombinasi
+			Contoh di lampiran Tugas 6 (Scater Plot Iris.PNG)
+			Sepal Length dan Sepal Width
+			Petal Length dan Petal Width
+				Hasil visualiasi dalam 1 frame yang mempunyai 2 scatter plot
+		
+		- Buatlah boxplot dari fitur sepal length, sepal width, petal length, petal width.
+			Berapa persentase nilai extrim disetiap fiturnya
+		
+		- Buatlah visualiasi elbow untuk mendapatkan jumlah K optimal
+	
+	Langkah 3. Pembagian Data
+		- Split Validasi 80% vs 20%
+		- Holdout 80% vs 20%
+		- K Cross Validasi (K=10) 80% vs 20%
+	
+	Langkah 4. Klasterisasi metode KMeans dan DBSCAN
+		- Percobaan 1. Menggunakan fitur Sepal Length dan Sepal Width
+			+ Perlakuan 1. Split Validasi 80% vs 20%
+			+ Perlakuan 2. Holdout 80% vs 20%
+			+ Perlakuan 3. K Cross Validasi (K=10) 80% vs 20%
+		- Percobaan 2. Menggunakan fitur Petal Length dan Petal Width
+			+ Perlakuan 4. Split Validasi 80% vs 20%
+			+ Perlakuan 5. Holdout 80% vs 20%
+			+ Perlakuan 6. K Cross Validasi (K=10) 80% vs 20%
+	
+	Langkah 5. Evaluasi Model
+		- Menggunakan sum square eror (SSE)
+			Perhatikan Lampiran Tugas 6/Template Jawaban.xlsx
+		
+		- Visualisasi Scatter Plot
+			Gambar 1. Sepal Length dan Sepal Width (Default) dengan hasil proses KMeans
+			Gambar 2. Sepal Length dan Sepal Width (Default) dengan hasil proses DBSCAN
+			Gambar 3. Petal Length dan Petal Width (Default) dengan hasil proses KMeans
+			Gambar 4. Petal Length dan Petal Width (Default) dengan hasil proses DBSCAN
+				@Gambar punya 4 visualisasi scatter plot
+					- kondisi default
+					- kondisi perlakukan dengan split validasi
+					- kondisi perlakukan dengan cross validasi
+					- kondisi perlakukan dengan holdout
+		
+		- Lakukan analisa.
+			Apa perlakukan (1-6) yang memiliki nilai SSE paling terkecil.
+			Mengapa perlakukan tersebut memiliki nilai terkecil.
+	
