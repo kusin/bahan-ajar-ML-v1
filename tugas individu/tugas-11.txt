@@ -1,0 +1,94 @@
+Waktu Pengerjaan 14 Hari
+
+Instal aplikasi HW Info untuk
+	- memonitor suhu CPU dan GPU
+	- memonitor clock speed CPU dan GPU
+Instal aplikasi CPU-z untuk melihat spesifikasi CPU yg digunakan
+Instal aplikasi GPU-z untuk melihat spesifikasi GPU yg digunakan
+Instal aplikasi CrystalDiskMark untuk melihat speed HDD / SSD
+
+
+Rekomendasi setting
+	- Turn on multicore (msconfig)
+	- Ganti setting daya listrik, dari belance ke mode performance
+	- Ganti setting
+		# minimum processor state (on batre/plugged in) ke 100%.
+		# maximum processor state (on batre/plugged in) ke 100%.
+	- Update semua driver
+	- Ganti pasta menjadi liquid metal
+	- Menggunakan coolingpad tambahan
+	- Suhu ruangan terjada di 16 derajat celcius
+	- Apabila SSD menggunakan 2 keping, rubah config menjadi rate 0
+	- Apabila RAM memiliki fitur XMP, aktifkan lah fitur XMP
+	Semua rekomendasi setting digunakan untuk meningkatkan performance dan menurunkan suhu cpu
+
+
+Nomor 1. Perangkat Lunak dan Perangkat Keras
+Analisa Perangkat Lunak (ex jawaban)
+	- OS Win 10 Pro versi 1909
+	- Installer Anaconda3 v.2020-11 x64.exe
+	- Python v.3.8.5
+	- Keras v.2.4.3
+	- Tensorflow v.2.4.1
+	- Pandas v.1.1.3
+	- Numpy v.1.19.2
+	- SKLearn v.0.32.2
+Makna nomor 1 bagian a (Akan datang masa, dimana source code eror krn perbedaan versi dari tools yg digunakan)
+
+
+Analisa Perangkat Keras (ex jawaban)
+(lampiran tugas 11 - Analisa Perangkat Keras.png)
+Laptop 	: HP OMEN 15-EN0013AX
+CPU 	: AMD Ryzen 9 4900H. 8C/16T. 7nm.
+			Default Clock Speed 3.3Ghz
+			Max TDP 35 Watt
+			L3 cache 8MB.
+GPU 	: RTX 2060 GDDR6 6GB.
+			Default Clock Speed 960Mhz
+			Bandwidth 264 GB/s
+			Interface PCIe gen3 x8 x16
+RAM 	: DDR4 16GB 3200 Mhz CL 22
+SSD 	: M2 NVMe 1TB PCIe Gen3 x4 
+			Speed Read 1,8GB/s. Write 1,7GB/s
+Makna nomor 1 bagian b (Setiap mhs dapat memaksimal perangkat keras yg digunakan untuk mengurangi waktu komputasi dan kompleksitas ruang)
+
+
+Nomor 2. Analisa dan Perbandingan Hyperparameter tuning Menggunakan Metode LSTM dan GRU
+	- Template Jawaban
+		# (Lampiran Tugas 11/template jawaban.xlsx)
+	
+	- Dataset
+		# Praproses Data Kebakaran hutan dan Cuaca (Tugas 3)
+	
+	- Praproses
+		# Integrasi data untuk menggabungkan data kebakran hutan dengan data cuaca
+		# Normaliasi Data untuk merubah rentang nilai menjadi -1 sampai 1
+	
+	- Pembagian Data :
+		# Split Validasi 80% 20%
+	
+	- Algoritma
+		# LSTM (https://keras.io/api/layers/recurrent_layers/gru/)
+		# GRU (https://keras.io/api/layers/recurrent_layers/gru/)
+	
+	- Arsitektur Hyperparameter Tuning
+	
+	- Evaluasi Model
+		# Lost Function (week 11 lstm-rnn bagian 1/lstm prediksi.ipynb)
+		# RMSE dan Kompleksitas Waktu (week 11 lstm-rnn bagian 2/semua file .ipynb)
+	
+	- Visualisasi
+		# Grafik Loss Function (Tugas Individu/Lampiran Tugas 11/lampiran tugas 11 - Visual Loss Function.png)
+		# Grafik RMSE (Tugas Individu/Lampiran Tugas 11/lampiran tugas 11 - Visual RMSE)
+		# Grafik Kompleksitas Waktu (Buat sendiri, namun contohnya seperti grafik RMSE)
+		# Grafik Suhu CPU, GPU (Menggunakan aplikasi HW Info)
+		# Grafik Clock Speed CPU, GPU (Menggunakan aplikasi HW Info)
+	
+	- Laporan Tertulis format .docx
+		(Contoh Lampiran 11 - Analisa Loss Function.ppt)
+		
+	Note.
+	- Setelah selesai membuat source untuk nomor2.
+	- Perhatikan Background Proser di Task Manager. Tutup semua aplikasi yg tidak dibutuhkan
+	- Hal ini untuk meningkatkan akurasi saat menggunakan HWInfo.
+	- Jika menggunakan OS Mac/Linux harap menyesuaikan.
