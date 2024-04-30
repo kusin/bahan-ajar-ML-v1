@@ -11,7 +11,8 @@ library(plotly) # memperindah diagram
 
 # ALGORITMA
 # -input data
-df <- read_excel("D:/Bahan Ajar Big Data/dataset/dataset_covid.xlsx", sheet = "data covid indonesia")
+
+df <- read_excel("D:/Materi Kuliah - Machine Learning v1/dataset/dataset_covid.xlsx", sheet = "data covid indonesia")
 
 # - inputan dataset dilakukan modifikasi tipe data
 # karena tanggal dibaca string
