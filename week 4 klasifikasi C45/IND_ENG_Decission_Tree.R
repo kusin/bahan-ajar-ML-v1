@@ -7,7 +7,7 @@ library(RWeka)
 library(partykit)
 
 # load dataset
-dataset <- read.csv("PlayTennis.csv")
+dataset <- read.csv("../dataset/PlayTennis.csv")
 
 # membuat dataset agar bernilai kategori sesuai sarat inputan decision tree
 dataset <- data.frame(
